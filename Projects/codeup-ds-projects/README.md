@@ -1,0 +1,1 @@
+Both Copy_Regression_Proj_Sandy_Graham and Regression_Proj_Sandy_Graham were my attempts at our regression project on the Zillow data. However, I did the Copy version second so it is a little cleaner. 

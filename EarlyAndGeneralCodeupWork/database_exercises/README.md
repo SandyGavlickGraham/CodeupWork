@@ -1,0 +1,1 @@
+This project contains all of the exercises we did on SQL working on databases.

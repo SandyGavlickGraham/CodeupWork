@@ -1,0 +1,256 @@
+# IPython log file
+
+
+# read the file in
+# turn it into lines
+# figure out how to deal with a single line
+# apply that to all the lines
+with open('./access.log') as f:
+    contents = f.read()
+
+type(contents)
+contents
+len(contents)
+len('abc')
+lines = contents.split('\n')
+type(lines), type(lines[0])
+line = lines[0]
+line
+line.split(' ')
+# split the line on the space, identify the relevant parts, and discard anythin irrelevant
+def process_line(line: str):
+    parts = line.split(' ')
+    for i, part in enumerate(parts):
+        print(i, part)
+
+process_line(line[0])
+line[0]
+lines[0]
+process_line(lines[0])
+def process_line(line: str):
+    parts = line.split(' ')
+    ip = parts[0]
+    timestamp = parts[3] + parts[4]
+    request_method = parts[5]
+    path = parts[6]
+    protocol_version = parts[7]
+    status_code = parts[8]
+    size = parts[9]
+    unknown = parts[10]
+    user_agent = parts[11]
+
+def process_line(line: str):
+    parts = line.split(' ')
+    ip = parts[0]
+    timestamp = parts[3] + parts[4]
+    request_method = parts[5]
+    path = parts[6]
+    protocol_version = parts[7]
+    status_code = parts[8]
+    size = parts[9]
+    unknown = parts[10]
+    user_agent = parts[11]
+    return dict(ip=ip, timestamp=timestamp,
+                method=request_method,
+                path=path,
+                protocol=protocol_version,
+                code=status_code,
+                size=size,
+                unknown=unknown,
+                user_agent=user_agent)
+
+process_line(lines[0])
+def process_line(line: str):
+    parts = line.split(' ')
+
+    ip = parts[0]
+
+    timestamp = parts[3] + parts[4]
+    timestamp = timestamp.replace('[', '')
+    timestamp = timestamp.replace(']', '')
+
+    request_method = parts[5]
+    request_method = request_method.replace('"', '')
+
+    path = parts[6]
+    protocol_version = parts[7]
+    protocol_version = protocol_version.replace('"', '')
+    status_code = parts[8]
+    size = parts[9]
+    unknown = parts[10]
+    unknown = unknown.replace('"', '')
+    user_agent = parts[11]
+    user_agent = user_agent.replace('"', '')
+
+    return dict(ip=ip, timestamp=timestamp,
+                method=request_method,
+                path=path,
+                protocol=protocol_version,
+                code=status_code,
+                size=size,
+                unknown=unknown,
+                user_agent=user_agent)
+
+process_line(lines[0])
+process_line(lines[9])
+process_line(lines[126])
+len(lines)
+process_line(lines[13972])
+process_line(lines[13975])
+process_line(lines[13974])
+lines[13974]
+lines[-4:-1]
+lines[-1]
+lines
+lines[-1]
+lines = lines[:-1]
+processed_lines = []
+for line in lines:
+    processed_lines.append(process_line(line))
+
+processed_lines[123:126]
+make_into_dataframe(processed_lines)
+import pandas as pd
+df = pd.DataFrame(processed_lines)
+df.head()
+df.head()
+# 1. make sure timestamp is a datetime type (Hint:pd.to_datetime)
+# 2. What does the unknown column mean?
+# 3. What do you make of the user_agent data?
+# 4. How many unique ip addresses are there? What does this mean? What is the most frequent ip? What does this mean?
+df.to_csv('access_log.csv', index=False)
+'aaaa'.replace('a', 'x')
+'aaaa'.replace('a', 'x', 1)
+df.timestamp.head()
+pd.to_datetime(df.timestamp.head())
+pd.to_datetime(df.timestamp.head(), errors='ignore')
+pd.to_datetime(df.timestamp.head(), errors='coerce')
+pd.to_datetime('16/Apr/2019:19:34:42+0000')
+pd.to_datetime('16/Apr/2019 19:34:42+0000')
+df.timestamp.head()
+df.timestamp.str.replace(':', ' ').head()
+df.timestamp.str.replace(':', ' ', 1).head()
+pd.to_datetime(df.timestamp.str.replace(':', ' ', 1))
+df.timestamp = pd.to_datetime(df.timestamp.str.replace(':', ' ', 1))
+df.unknown.value_counts()
+df.drop(['unknown'], axis=1, inplace=True)
+df.head()
+df.ip.value_counts()
+df.user_agent.value_counts()
+df.user_agent.str.startswith('Mozilla')
+df[df.user_agent.str.startswith('Mozilla')]
+lines
+lines[173]
+def process_line(line: str):
+    parts = line.split(' ')
+
+    ip = parts[0]
+
+    timestamp = parts[3] + parts[4]
+    timestamp = timestamp.replace('[', '')
+    timestamp = timestamp.replace(']', '')
+
+    request_method = parts[5]
+    request_method = request_method.replace('"', '')
+
+    path = parts[6]
+    protocol_version = parts[7]
+    protocol_version = protocol_version.replace('"', '')
+    status_code = parts[8]
+    size = parts[9]
+    unknown = parts[10]
+    unknown = unknown.replace('"', '')
+    user_agent = parts[11:]
+    user_agent = ' '.join(user_agent)
+    user_agent = user_agent.replace('"', '')
+
+    return dict(ip=ip, timestamp=timestamp,
+                method=request_method,
+                path=path,
+                protocol=protocol_version,
+                code=status_code,
+                size=size,
+                unknown=unknown,
+                user_agent=user_agent)
+
+lines[173]
+process_line(lines[173])
+df = pd.DataFrame([process_line(line) for line in lines])
+df.head()
+df.timestamp = pd.to_datetime(df.timestamp.str.replace(':', ' ', 1))
+df.drop(columns='unknown', inplace=True)
+df.head()
+df.user_agent.value_counts()
+df.head()
+df.set_index('timestamp').head()
+df.set_index('timestamp', inplace=True)
+df.head()
+df['2019']
+df['2019-04-16']
+df['2019-04-17']
+df['2019-04-17 22']
+df['2019-04-17 22:00:00']
+df['2019-04-17 22:']
+df['2019-04-17 22:00']
+df.head()
+df['2019-04-16 19:']
+df['2019-04-16 19']
+df['2019-04-16 19']
+df['2019-04-16 19:3']
+df['2019-04-16 19:30']
+df['2019-04-16 19']
+df['2019-04-16 19':'2019-04-16 21']
+df['2019-04-16 19':'2019-04-16 21']
+df['2019-04-16 19':'2019-04-16 21']
+df.head()
+df.resample('5min').size.sum()
+df['size'].resample('5min').sum()
+df.dtypes
+df['size'] = df['size'].astype('int')
+df.dtypes
+df['size'].resample('5min').sum()
+df['size'].resample('5min').sum() / 1024 / 1024
+df.index.min()
+df.index
+df.index.min(), df.index.max()
+df['size'].sum)(
+df['size'].sum()
+gb_out = df['size'].sum() / 1024 / 1024 / 1024
+gb_out
+df.resample('H').count()
+df.path.resample('H').count()
+df['2019-04-17 10']
+df.path.resample('H').count()
+df.tz_convert('America/Chicago')
+df.head()
+df.tz_localize('utc').tz_convert('America/Chicago').head()
+df = df.tz_localize('utc').tz_convert('America/Chicago')
+df.head()
+df['size'].resample('10min').sum()
+df['size'].resample('10min').sum().plot()
+import matplotlib.pyplot as plt
+plt.show()
+df.head()
+df.ip.str[:2]
+df.head()
+df.reset_index(inplace=True)
+df.head()
+df.timestamp.dt.hour
+df.timestamp.dt.day
+df.timestamp.dt.weekday
+df.timestamp.dt.month
+df.head()
+df['hour'] = df.timestamp.dt.hour
+df.hour
+df.groupby('hour').['size'].sum()
+df.groupby('hour')['size'].sum()
+df.timestamp.dt.weekday_name()
+df.timestamp.dt.weekday_name
+df['weekday'] = df.timestamp.dt.weekday_name
+df.groupby(')
+df.groupby('weekday')['size'].mean()
+pd.to_datetime
+df.set_index('timestamp', inplace=True)
+df['2019-04-17'].head()
+df.resample('5min').mean()
+df.head()
